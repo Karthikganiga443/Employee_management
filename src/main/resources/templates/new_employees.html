@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="ISO-8859-1">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<title>Employee Management System</title>
+	</head>
+	<body>
+		
+		<div class="container">
+			<h1 align ="center">Employee Mangement System</h1>
+			<hr>
+			
+			<form class="border w-50 m-auto p-5"
+			      th:action="@{/saveEmployee}"
+			      th:object="${employee}"
+			      method="POST">
+
+			    <h3 align="center" class="mb-2">Add Employee</h3>
+
+				<input type="text" th:field="*{id}"
+						           placeholder="Emp ID" class="form-control mb-3">
+			    
+			    <input type="text" th:field="*{firstName}"
+			           placeholder="First Name" class="form-control mb-3">
+
+			  
+			    <input type="text" th:field="*{lastName}"
+			           placeholder="Last Name" class="form-control mb-3">
+
+			 
+			    <input type="email" th:field="*{email}"
+			           placeholder="Email" class="form-control mb-3">
+
+			
+			    <input type="text" th:field="*{phoneNumber}"
+			           placeholder="Phone Number" class="form-control mb-3">
+
+			 <div> <label> Date of birth: 
+			    <input type="date" th:field="*{dob}"
+			           class="form-control mb-3"> </label>
+					   <label> Joined Date: 
+					   			    <input type="datetime-local" th:field="*{joinedAt}"
+					   			           class="form-control mb-3"></label>
+		     </div>
+
+			   <div> 
+			   </div>
+
+			   
+			    <select th:field="*{gender}" class="form-control mb-3">
+			        <option value="">Select Gender</option>
+			        <option value="Male">Male</option>
+			        <option value="Female">Female</option>
+			        <option value="Other">Other</option>
+			    </select>
+
+			    
+			    <input type="text" th:field="*{address}"
+			           placeholder="Address" class="form-control mb-3">
+
+			  
+			    <input type="text" th:field="*{city}"
+			           placeholder="City" class="form-control mb-3">
+
+			  
+			    <input type="text" th:field="*{state}"
+			           placeholder="State" class="form-control mb-3">
+
+			 
+			    <input type="text" th:field="*{country}"
+			           placeholder="Country" class="form-control mb-3">
+
+			    
+			    <input type="text" th:field="*{zipCode}"
+			           placeholder="Zip Code" class="form-control mb-3">
+
+			
+					   <label>Profile Image URL</label>
+					   <input type="text" th:field="*{imageUrl}" 
+					          placeholder="Enter image URL" class="form-control mb-4">
+
+			    
+			    <button class="btn btn-success w-100">Add Employee</button>
+
+			</form>
+
+			
+			
+		</div>
+	</body>
+</html>
