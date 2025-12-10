@@ -4,13 +4,29 @@
     <meta charset="ISO-8859-1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Employee Management System</title>
+    <style>
+        .navbar-custom {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .logout-btn {
+            margin-left: auto;
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+    <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">Employee Management System</span>
+        <div class="d-flex align-items-center logout-btn">
+            <span class="text-white me-3" th:text="'Welcome, ' + ${session.user_email}"></span>
+            <a th:href="@{/logout}" class="btn btn-outline-light">Logout</a>
+        </div>
+    </div>
+</nav>
 
-    <h1 align="center">Employee Management System</h1>
-
+<div class="container mt-4">
     <h2>Employee List</h2>
 
     <a class="btn btn-info mb-2" th:href="@{/showNewEmpForm}">Add Employee</a>
@@ -18,13 +34,11 @@
     <table border="1" class="table table-striped table-responsive-md">
         <thead align="center">
         <tr>
-            <!-- FIXED SORT LINK -->
             <th>
                 <a th:href="@{'/page/' + ${currentPage} (sortField='id', sortDir=${reverseSortDir})}">
                     Employee ID
                 </a>
             </th>
-
             <th>Employee First Name</th>
             <th>Employee Last Name</th>
             <th>Employee Email</th>
@@ -51,52 +65,41 @@
 
     <div th:if="${totalPage > 1}">
         <div class="row">
-
             <div class="col-sm-2">
                 Total Rows: [[${totalItems}]]
             </div>
 
-            <!-- PAGE NUMBERS FIXED -->
             <div class="col-sm-1">
                 <span th:each="i : ${#numbers.sequence(1, totalPage)}">
-
                     <a th:if="${currentPage != i}"
                        th:href="@{'/page/' + ${i} (sortField=${sortField}, sortDir=${sortDir})}">
                         [[${i}]]
                     </a>
-
                     <span th:unless="${currentPage != i}">
                         [[${i}]]
                     </span>
-
                     &nbsp;
                 </span>
             </div>
 
-            <!-- NEXT FIXED -->
             <div class="col-sm-1">
                 <a th:if="${currentPage < totalPage}"
                    th:href="@{'/page/' + ${currentPage + 1} (sortField=${sortField}, sortDir=${sortDir})}">
                     Next
                 </a>
-
                 <span th:unless="${currentPage < totalPage}">Next</span>
                 &nbsp;
             </div>
 
-            <!-- LAST FIXED -->
             <div class="col-sm-1">
                 <a th:if="${currentPage < totalPage}"
                    th:href="@{'/page/' + ${totalPage} (sortField=${sortField}, sortDir=${sortDir})}">
                     Last
                 </a>
-
                 <span th:unless="${currentPage < totalPage}">Last</span>
             </div>
-
         </div>
     </div>
-
 </div>
 
 </body>
