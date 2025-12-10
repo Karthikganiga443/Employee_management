@@ -17,8 +17,13 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         String requestURI = request.getRequestURI();
         
         // Allow access to login and registration pages without authentication
-        if (requestURI.contains("/login") || requestURI.contains("/registration") || 
-            requestURI.equals("/") || requestURI.contains("/resources/")) {
+        if (requestURI.contains("/login") || 
+            requestURI.contains("/registration") || 
+            requestURI.equals("/") ||
+            requestURI.startsWith("/css/") ||
+            requestURI.startsWith("/js/") ||
+            requestURI.startsWith("/resources/") ||
+            requestURI.startsWith("/images/")) {
             return true;
         }
         

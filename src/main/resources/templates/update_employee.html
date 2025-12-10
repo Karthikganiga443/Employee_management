@@ -11,23 +11,22 @@
 <body>
 
 <div class="container">
-    <h1 class="text-center">Employee Management System</h1>
+    <h1 class="text-center mt-4">Employee Management System</h1>
     <hr>
     <form class="border w-50 m-auto p-5" 
-          action="#" 
           th:action="@{/saveEmployee}" 
           th:object="${employee}" 
           method="POST">
 
-        <h3 class="text-center">Update Employee</h3>
+        <h3 class="text-center mb-4">Update Employee</h3>
 
         <input type="hidden" th:field="*{id}"/>
 
-        <input type="text" th:field="*{firstName}" placeholder="First Name" class="form-control mb-3">
+        <input type="text" th:field="*{firstName}" placeholder="First Name" class="form-control mb-3" required>
 
-        <input type="text" th:field="*{lastName}" placeholder="Last Name" class="form-control mb-3">
+        <input type="text" th:field="*{lastName}" placeholder="Last Name" class="form-control mb-3" required>
 
-        <input type="email" th:field="*{email}" placeholder="Email" class="form-control mb-3">
+        <input type="email" th:field="*{email}" placeholder="Email" class="form-control mb-3" required>
 
         <input type="text" th:field="*{phoneNumber}" placeholder="Phone Number" class="form-control mb-3">
 
@@ -38,9 +37,11 @@
             <option value="Other" th:selected="${employee.gender=='Other'}">Other</option>
         </select>
 
-        <input type="date" th:field="*{dob}" placeholder="Date of Birth" class="form-control mb-3">
+        <label class="form-label">Date of Birth</label>
+        <input type="date" th:field="*{dob}" class="form-control mb-3">
 
-        <input type="datetime-local" th:field="*{joinedAt}" placeholder="Joined At" class="form-control mb-3">
+        <label class="form-label">Joined At</label>
+        <input type="datetime-local" th:field="*{joinedAt}" class="form-control mb-3">
 
         <input type="text" th:field="*{address}" placeholder="Address" class="form-control mb-3">
 
@@ -52,11 +53,11 @@
 
         <input type="text" th:field="*{zipCode}" placeholder="Zip Code" class="form-control mb-3">
 
-        <input type="text" th:field="*{imageUrl}" placeholder="Image URL" class="form-control mb-3">
+        <input type="text" th:field="*{imageUrl}" placeholder="Image URL" class="form-control mb-4">
 
-        <div class="d-flex justify-content-between mt-4">
-            <button type="submit" class="btn btn-success">Update Employee</button>
-            <a th:href="@{/}" class="btn btn-secondary">Back</a>
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-success flex-grow-1">Update Employee</button>
+            <a th:href="@{/allEmpDetails}" class="btn btn-secondary flex-grow-1">Back to List</a>
         </div>
     </form>
 </div>

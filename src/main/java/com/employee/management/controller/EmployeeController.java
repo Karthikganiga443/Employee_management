@@ -13,11 +13,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.employee.management.model.Employee;
 import com.employee.management.service.EmployeeService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class EmployeeController {
 
     @Autowired
     private EmployeeService empServ;
+
+    @GetMapping("/")
+    public String home(HttpSession session) {
+        if (session != null && session.getAttribute("user_email") != null) {
+            return "redirect:/allEmpDetails";
+        }
+        return "redirect:/login";
+    }
 
     @GetMapping("/allEmpDetails")
     public String viewHomePage(Model model) {
@@ -50,11 +60,9 @@ public class EmployeeController {
     }
 
     @PostMapping("/saveEmployee")
-    public String saveEmployee(@ModelAttribute("employee") Employee emp
-                               ) {
-
+    public String saveEmployee(@ModelAttribute("employee") Employee emp) {
         empServ.addEmployee(emp);
-        return "redirect:all_emp_details";
+        return "redirect:/allEmpDetails";
     }
 
     @GetMapping("/showFormForUpdate/{id}")
@@ -67,7 +75,7 @@ public class EmployeeController {
     @GetMapping("/deleteEmployee/{id}")
     public String deleteEmpById(@PathVariable String id) {
         empServ.deleteEmployeeById(id);
-        return "redirect:all_emp_details";
+        return "redirect:/allEmpDetails";
     }
 
     @GetMapping("/employeeDetails/{id}")
